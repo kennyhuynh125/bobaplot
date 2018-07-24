@@ -35,3 +35,28 @@ export const storesByState = (array) => {
     }
     return state;
 }
+
+// creates an object where each key is a store and value is # of stores across the US
+export const topTenStores = (array) => {
+    let stores = {};
+    for (let store of array) {
+        if (store.name in stores) {
+            stores[store.name]++;
+        } else {
+            stores[store.name] = 1;
+        }
+    }
+    let countOfStores = [];
+    for (let key in stores) {
+        countOfStores.push({
+            name: key,
+            count: stores[key],
+        })
+    }
+    countOfStores = countOfStores.sort((a,b) => b.count - a.count).slice(0,10);
+    let topTenStores = {};
+    for (let store of countOfStores) {
+        topTenStores[store.name] = store.count;
+    }
+    return topTenStores;
+}
