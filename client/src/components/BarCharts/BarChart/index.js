@@ -1,15 +1,18 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-const TopTenStores = (props) => {
+// component to handle creating any type of bar chart
+// props passed in are the lists for the x & y axis
+// and title of the chart
+const BarChart = (props) => {
     const data = [{
         type: 'bar',
-        x: props.stores,
-        y: props.count
+        x: props.xList,
+        y: props.yList
     }];
 
     const layout = {
-        title: 'Top Ten Most Stores Across the US',
+        title: props.title,
         autosize: true,
     };
 
@@ -21,4 +24,4 @@ const TopTenStores = (props) => {
     )
 }
 
-export default TopTenStores;
+export default BarChart;

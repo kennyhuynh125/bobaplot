@@ -3,33 +3,41 @@ import {
     strToNum,
     storesByRatings,
     storesByState,
-    topTenStores
+    topTenStores,
+    topTenReviewCount
 } from '../../helper';
 
-import Ratings from './Ratings';
-import StoresByState from './StoresByState';
-import TopTenStores from './TopTenStores';
+import BarChart from './BarChart';
 
 const BarCharts = (props) => {
     const data = strToNum(props.data);
     const numStoresByRatings = storesByRatings(data);
     const numStoresByState = storesByState(data);
     const topTen = topTenStores(data);
+    const tenReviewCount = topTenReviewCount(data);
     console.log(topTen);
     return (
         <div>
             <h1>Bar charts</h1>
-            <Ratings
-                ratings={Object.keys(numStoresByRatings)}
-                ratingCount={Object.values(numStoresByRatings)}
+            <BarChart
+                xList={Object.keys(numStoresByRatings)}
+                yList={Object.values(numStoresByRatings)}
+                title={'Number of Ratings'}
             />
-            <StoresByState
-                states={Object.keys(numStoresByState)}
-                stateCount={Object.values(numStoresByState)}
+            <BarChart
+                xList={Object.keys(numStoresByState)}
+                yList={Object.values(numStoresByState)}
+                title={'Number of Stores by State'}
             />
-            <TopTenStores
-                stores={Object.keys(topTen)}
-                count={Object.values(topTen)}
+            <BarChart
+                xList={Object.keys(topTen)}
+                yList={Object.values(topTen)}
+                title={'Top Ten Most Stores Across the US'}
+            />
+            <BarChart
+                xList={Object.keys(tenReviewCount)}
+                yList={Object.values(tenReviewCount)}
+                title={'Top Ten Stores with Most Review Counts'}
             />
         </div>
     );

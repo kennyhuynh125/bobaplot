@@ -60,3 +60,14 @@ export const topTenStores = (array) => {
     }
     return topTenStores;
 }
+
+// creates an object where each key is a store and value is # of reviews
+export const topTenReviewCount = (array) => {
+    const topTenReviewCount = array.sort((a,b) => b.review_count - a.review_count).slice(0,10);
+    let object = {};
+    for (let store of topTenReviewCount) {
+        const storeInfo = store.name + ',' + store.address1 + ',' + store.city + ',' + store.state + ',' + store.zip_code;
+        object[storeInfo] = store.review_count;
+    }
+    return object;
+}
