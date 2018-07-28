@@ -3,6 +3,11 @@ import { Container, Row, Col } from 'reactstrap';
 
 import Map from '../Map';
 import BarCharts from '../BarCharts';
+import ChoroplethMap from '../ChoroplethMap';
+
+import {
+    storesByState
+} from '../../helper';
 
 class Home extends Component {
     constructor(props) {
@@ -33,6 +38,7 @@ class Home extends Component {
 
     render() {
         console.log(this.state.bobaStores);
+        const stores = storesByState(this.state.bobaStores);
         return (
             <Container>
                 <Row>
@@ -45,12 +51,16 @@ class Home extends Component {
                                 latList={this.state.latList}
                                 names={this.state.names}
                             />
+                            <ChoroplethMap
+                                locations={Object.keys(stores)}
+                                values={Object.values(stores)}
+                            />
                         </div>
                         <Row>
                             <BarCharts
                                 data={this.state.bobaStores}
                             />
-                        </Row>  
+                        </Row>
                     </Col>
                 </Row>
             </Container>
